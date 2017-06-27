@@ -1,6 +1,6 @@
-# Quasar App
+# Vue Battle
 
-> A Quasar project
+> A Vue.js + Vuex + Quasar project
 
 ## Build Setup
 
