@@ -1,43 +1,9 @@
 <template>
     <q-layout ref="layout">
-    
         <div class="container">
-            <div class="row">
-                <div class="col">
-                    <q-card style="width: 700px">
-                        <q-card-title>
-                            {{pkmnTopName}}
-                        </q-card-title>
-                        <q-card-separator></q-card-separator>
-                        <q-card-main>
-                            <q-progress :percentage="pkmnTopLifePoints" :color="pkmnTopColorProgress" style="height: 50px"></q-progress>
-                        </q-card-main>
-                    </q-card>
-                </div>
-                <div class="col">
-                    <img height="300" :src="pkmnTopImg">
-                </div>
-            </div>
-    
-            <div class="row">
-                <div>
-                    <img height="300" :src="pkmnBottomImg">
-                </div>
-                <div>
-                    <q-card style="width: 700px">
-                        <q-card-title>
-                            {{pkmnBottomName}}
-                        </q-card-title>
-                        <q-card-separator></q-card-separator>
-                        <q-card-main>
-                            <q-progress :percentage="pkmnBottomLifePoints" :color="pkmnBottomColorProgress" style="height: 50px"></q-progress>
-                        </q-card-main>
-                    </q-card>
-                </div>
-            </div>
-    
+            <Top></Top>
+            <Bottom></Bottom>
         </div>
-    
         <q-toolbar slot="footer">
     
             <q-btn color="secondary" @click="tackle" :disable="lockButtons">
@@ -59,13 +25,20 @@
             </q-btn>
     
         </q-toolbar>
-    
     </q-layout>
 </template>
  
 <script>
-import { QLayout, QToolbar, QBtn, QSpinnerHourglass, QCard, QCardTitle, QCardSeparator, QCardMain, QProgress, Alert, Dialog, Toast } from 'quasar'
+// Se importan componentes UI de quasar framework
+import { QLayout, QToolbar, QBtn, QSpinnerHourglass, Alert, Dialog } from 'quasar'
+// Se importan Getters y Actions definidos con vuex
 import { mapGetters, mapActions } from 'vuex'
+
+// Se importa componente inferior
+import Bottom from './Bottom.vue'
+// Se importa componente superior
+import Top from './Top.vue'
+
 export default {
   name: 'stage',
   components: {
@@ -73,14 +46,10 @@ export default {
     QToolbar,
     QBtn,
     QSpinnerHourglass,
-    QCard,
-    QCardTitle,
-    QCardSeparator,
-    QCardMain,
-    QProgress,
     Alert,
     Dialog,
-    Toast
+    Bottom, // Se establece el componente inferior dentro de la propiedad Components de la instancia Vue
+    Top // Se establece el componente superior dentro de la propiedad Components de la instancia Vue
   },
   data () {
     return {
@@ -200,22 +169,14 @@ export default {
   },
   computed: {
     ...mapGetters([
-      // Nombre mostrado en pantalla para el componente superior (string)
-      'pkmnTopName',
       // Porcentaje de vida del componente superior (integer)
       'pkmnTopLifePoints',
-      // Imagen del componente superior (PNG BASE64)
-      'pkmnTopImg',
-      // Color para barra de progreso superior
-      'pkmnTopColorProgress',
-      // Nombre mostrado en pantalla para el componente inferior (string)
-      'pkmnBottomName',
       // Porcentaje de vida del componente inferior (integer)
       'pkmnBottomLifePoints',
-      // Imagen del componente inferior (PNG BASE64)
-      'pkmnBottomImg',
-      // Color para barra de progreso inferior
-      'pkmnBottomColorProgress'
+      // Nombre mostrado en pantalla para el componente inferior (string)
+      'pkmnBottomName',
+      // Nombre mostrado en pantalla para el componente superior (string)
+      'pkmnTopName'
     ])
   },
   watch: {
