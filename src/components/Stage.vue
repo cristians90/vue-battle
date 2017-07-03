@@ -89,7 +89,7 @@ export default {
               setTimeout(() => {
                 // Se desecha la alerta de ataque del componente superior
                 alertPkmnTop.dismiss()
-                // Se desbloquean botones para evitar peticiones asincrónicas
+                // Se desbloquean botones
                 this.lockButtons = false
               }, 1000)
             })
