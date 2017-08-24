@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div>
-            <img height="300" :src="pkmnBottomImg">
+            <img id="PKBOTTOM" height="300" :src="pkmnBottomImg">
         </div>
         <div>
             <q-card style="width: 700px">

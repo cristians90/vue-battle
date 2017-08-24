@@ -33,6 +33,8 @@
 import { QLayout, QToolbar, QBtn, QSpinnerHourglass, Alert, Dialog } from 'quasar'
 // Se importan Getters y Actions definidos con vuex
 import { mapGetters, mapActions } from 'vuex'
+// COMENTAR!!!
+import { tween, css } from 'popmotion'
 
 // Se importa componente inferior
 import Bottom from './Bottom.vue'
@@ -71,6 +73,8 @@ export default {
       const textPkmnTop = this.pkmnTopName + ' uso Tackle'
       // Se lanza alerta de ataque del componente inferior
       const alertPkmnBottom = Alert.create({ color: 'positive', icon: '', html: textPkmnBottom })
+      // COMENTAR!!!
+      this.moveBottom()
       // Se envía acción para modificar porcentaje del componente superior
       // Se adjunta un objeto que posea el componente de destino y la cantidad de porcentaje a reducir
       this.$store.dispatch('modifyHp', { pokemon: 'TOP', value: -getRandomTackleValue() }).then(() => {
@@ -82,6 +86,8 @@ export default {
           if (this.pkmnTopLifePoints > 0) {
             // Se lanza alerta de ataque del componente superior
             const alertPkmnTop = Alert.create({ color: 'positive', icon: '', html: textPkmnTop })
+            // COMENTAR!!!
+            this.moveTop()
             // Se envía acción para modificar porcentaje del componente superior
             // Se adjunta un objeto que posea el componente de destino y la cantidad de porcentaje a reducir
             this.$store.dispatch('modifyHp', { pokemon: 'BOTTOM', value: -getRandomTackleValue() }).then(() => {
@@ -165,6 +171,32 @@ export default {
       if (val <= 0) {
         this.gameOver('LOSE')
       }
+    },
+    // COMENTAR!!!
+    // !!!!!!!!!!!
+    moveTop () {
+      const pokeImg = css(document.getElementById('PKTOP'))
+      const duration = 250
+      const varTween = tween({
+        to: -100,
+        duration,
+        yoyo: 1,
+        onUpdate: (v) => pokeImg.set('x', v)
+      })
+      varTween.start()
+    },
+    // COMENTAR!!!
+    // !!!!!!!!!!!
+    moveBottom () {
+      const pokeImg = css(document.getElementById('PKBOTTOM'))
+      const duration = 250
+      const varTween = tween({
+        to: 100,
+        duration,
+        yoyo: 1,
+        onUpdate: (v) => pokeImg.set('x', v)
+      })
+      varTween.start()
     }
   },
   computed: {

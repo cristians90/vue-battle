@@ -12,7 +12,7 @@
             </q-card>
         </div>
         <div class="col">
-            <img height="300" :src="pkmnTopImg">
+            <img id="PKTOP" height="300" :src="pkmnTopImg">
         </div>
     </div>
 </template>
